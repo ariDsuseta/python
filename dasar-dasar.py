@@ -77,38 +77,70 @@ not	not True	False
 
 # STUDI KASUS KALKULATOR SEDERHANA
 
-print("Masukan angka")
-hasil = 0
+# print("Masukan angka")
+# hasil = 0
+#
+# try:
+#     a = float(input("angka pertama: "))
+#     b = float(input("angka kedua: "))
+#     print("Pilih opertor (+, -, *, /, %, **, //)")
+#     operator = input("operator: ")
+#
+#     if operator == '+':
+#         hasil = a + b
+#     elif operator == '-':
+#         hasil = a - b
+#     elif operator == '*':
+#         hasil = a * b
+#     elif operator == "/":
+#         if b == 0.0 :
+#             print("tidak bisa di bagi 0")
+#             exit()
+#         hasil = a / b
+#     elif operator == '%':
+#         hasil = a % b
+#     elif operator == '**':
+#         hasil = a ** b
+#     elif operator == '//':
+#         if b == 0.0 :
+#             print("tidak bisa di bagi 0")
+#             exit()
+#         hasil = a // b
+#     else:
+#         print("Operator tidak di kenali!")
+#
+#     print(f"Hasil = {hasil}")
+# except ValueError:
+#     print("Error : anda harus memasukan angka")
 
+
+# percabangan
+
+# umur = int(input("masukan umur anda: "))
+#
+# if umur >= 18:
+#     print("Anda Sudah dewasa")
+# elif umur >= 13:
+#     print("Anda seorang remaja")
+# else:
+#     print("Anda masih anak anak")
+
+"""
+Buat program Python yang:
+
+Meminta pengguna memasukkan sebuah angka.
+Mengecek apakah angka tersebut positif, negatif, atau nol.
+Menampilkan hasil yang sesuai.
+
+"""
 try:
-    a = float(input("angka pertama: "))
-    b = float(input("angka kedua: "))
-    print("Pilih opertor (+, -, *, /, %, **, //)")
-    operator = input("operator: ")
+    angka = int(input("Masukan Angka: "))
 
-    if operator == '+':
-        hasil = a + b
-    elif operator == '-':
-        hasil = a - b
-    elif operator == '*':
-        hasil = a * b
-    elif operator == "/":
-        if b == 0.0 :
-            print("tidak bisa di bagi 0")
-            exit()
-        hasil = a / b
-    elif operator == '%':
-        hasil = a % b
-    elif operator == '**':
-        hasil = a ** b
-    elif operator == '//':
-        if b == 0.0 :
-            print("tidak bisa di bagi 0")
-            exit()
-        hasil = a // b
+    if angka > 0 :
+        print("Angka yang anda masukan positif")
+    elif angka == 0:
+        print("angka yang anda masukan nol")
     else:
-        print("Operator tidak di kenali!")
-
-    print(f"Hasil = {hasil}")
+        print("angka yang anda masukan negatif")
 except ValueError:
-    print("Error : anda harus memasukan angka")
+    print("yang anda masukan bukan angka")
