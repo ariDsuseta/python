@@ -21,10 +21,94 @@
 
 # confersi tipe data
 
-angka1 = int(input("Masukan angka pertama: "))
-angka2 = int(input("Masukan angka kedua: "))
+# angka1 = int(input("Masukan angka pertama: "))
+# angka2 = int(input("Masukan angka kedua: "))
 
 # print(f"Angka pertama: {angka1} \nangka kedua: {angka2}")
 
-hasil = angka1 + angka2
-print(f"Hasil dari penjumblahan {angka1} + {angka2} = {hasil}")
+# hasil = angka1 + angka2
+# print(f"Hasil dari penjumblahan {angka1} + {angka2} = {hasil}")
+
+
+# operator(+, -, *, **, /, //, %)
+# (tambah, kurang, kali, pangkat, bagi, pembagian bulat, modulus/sisa bagi)
+#
+# a = 10
+# b = 3
+#
+# penjumblahan = a + b
+# pengurangan = a - b
+# perkalian = a * b
+# pembagian = a / b
+# modulus = a % b
+# pangkat = a ** b
+# bagi_bulat = a // b
+#
+# print(f"penjumblahan = {penjumblahan}")
+# print(f"pengurngan = {pengurangan}")
+# print(f"perkalian = {perkalian}")
+# print(f"pembagian = {pembagian}")
+# print(f"modulus = {modulus}")
+# print(f"Pangkat = {pangkat}")
+# print(f"bagi bulat = {bagi_bulat}")
+
+"""
+OPERATOR PERBANDINGAN
+
+== (Sama dengan)	5 == 5	True
+!= (Tidak sama dengan)	5 != 3	True
+> (Lebih besar)	5 > 3	True
+< (Lebih kecil)	5 < 3	False
+>= (Lebih besar atau sama)	5 >= 5	True
+<= (Lebih kecil atau sama)	3 <= 5	True
+"""
+
+# print(f"apakah a == b ({a == b})") # False
+# print(f"apakah a != b ({a != b})") # True
+# print(f"apakah a <= b ({a <= b})") # False
+
+"""
+OPERTOR LOGIKA
+
+and	True and False	False
+or	True or False	True
+not	not True	False
+"""
+
+# STUDI KASUS KALKULATOR SEDERHANA
+
+print("Masukan angka")
+hasil = 0
+
+try:
+    a = float(input("angka pertama: "))
+    b = float(input("angka kedua: "))
+    print("Pilih opertor (+, -, *, /, %, **, //)")
+    operator = input("operator: ")
+
+    if operator == '+':
+        hasil = a + b
+    elif operator == '-':
+        hasil = a - b
+    elif operator == '*':
+        hasil = a * b
+    elif operator == "/":
+        if b == 0.0 :
+            print("tidak bisa di bagi 0")
+            exit()
+        hasil = a / b
+    elif operator == '%':
+        hasil = a % b
+    elif operator == '**':
+        hasil = a ** b
+    elif operator == '//':
+        if b == 0.0 :
+            print("tidak bisa di bagi 0")
+            exit()
+        hasil = a // b
+    else:
+        print("Operator tidak di kenali!")
+
+    print(f"Hasil = {hasil}")
+except ValueError:
+    print("Error : anda harus memasukan angka")
