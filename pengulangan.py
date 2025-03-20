@@ -59,14 +59,23 @@ try:
             continue
         break
 
-    print(f"Faktor dari {angka} adalah", end=' ')
-    for x in range(1, angka+1):
+    # print(f"Faktor dari {angka} adalah", end=' ')
+    # for x in range(1, angka+1):
+    #     if angka % x == 0:
+    #         # if x == angka:
+    #         #     print(angka, end='')
+    #         #     break
+    #         print(x, end=', ')
+    # print("\b\b")
+
+    hasil = ""
+
+    for x in range(1, angka + 1):
         if angka % x == 0:
-            # if x == angka:
-            #     print(angka, end='')
-            #     break
-            print(x, end=', ')
-    print("\b\b")
+            hasil += str(x) + ", "
+
+    print(f"Faktor dari {angka} adalah:", hasil[:-2])
+
 except ValueError:
     print("Yang anda masukan bukan angka")
 
