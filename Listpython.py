@@ -143,50 +143,50 @@ Jika tidak ditemukan, beri pesan "Angka tidak ditemukan".
 """
 
 
+# try:
+#     angka_input = input("Masukan angka-angka yang di pisahkan dengan koma: ")
+#     if angka_input.endswith(','):
+#         angka_input = angka_input[:-1]
+
+#     angka_string = angka_input.split(',')
+
+#     angka_list = [int(angka.strip()) for angka in angka_string]
+#     angka_cari = int(input("Masukan angka yang ingin anda cari: "))
+
+#     try:
+#         angka_index = angka_list.index(angka_cari)
+#         print(f"angka {angka_cari} mempunyai index ({angka_index})")
+#     except ValueError:
+#         print("Angka yang anda cari tidak di temukan")
+
+# except ValueError:
+#     print("Mohon masukan angka yang Valid")
+
 try:
-    angka_input = input("Masukan angka-angka yang di pisahkan dengan koma: ")
-    if angka_input.endswith(','):
-        angka_input = angka_input[:-1]
+    angka_input = input("Masukkan angka-angka yang dipisahkan dengan koma: ").strip()
 
-    angka_string = angka_input.split(',')
+    # Cek apakah input kosong atau hanya koma
+    if not angka_input or angka_input.replace(',', '').strip() == '':
+        print("Mohon masukkan minimal satu angka yang valid!")
+    else:
+        # Menghapus koma di akhir jika ada
+        if angka_input.endswith(','):
+            angka_input = angka_input[:-1]
 
-    angka_list = [int(angka.strip()) for angka in angka_string]
-    angka_cari = int(input("Masukan angka yang ingin anda cari: "))
+        angka_string = angka_input.split(',')
 
-    try:
-        angka_index = angka_list.index(angka_cari)
-        print(f"angka {angka_cari} mempunyai index ({angka_index})")
-    except ValueError:
-        print("Angka yang anda cari tidak di temukan")
+        # Konversi string ke integer, sambil menghapus spasi
+        angka_list = [int(angka.strip()) for angka in angka_string]
+
+        angka_cari = int(input("Masukkan angka yang ingin Anda cari: "))
+
+        # Cek apakah angka ada dalam list
+        indeks_list = [i for i, num in enumerate(angka_list) if num == angka_cari]
+
+        if indeks_list:
+            print(f"Angka {angka_cari} ditemukan pada indeks: {', '.join(map(str, indeks_list))}")
+        else:
+            print(f"Angka {angka_cari} tidak ditemukan dalam list.")
 
 except ValueError:
-    print("Mohon masukan angka yang Valid")
-
-# try:
-#     angka_input = input("Masukkan angka-angka yang dipisahkan dengan koma: ").strip()
-#
-#     # Cek apakah input kosong atau hanya koma
-#     if not angka_input or angka_input.replace(',', '').strip() == '':
-#         print("Mohon masukkan minimal satu angka yang valid!")
-#     else:
-#         # Menghapus koma di akhir jika ada
-#         if angka_input.endswith(','):
-#             angka_input = angka_input[:-1]
-#
-#         angka_string = angka_input.split(',')
-#
-#         # Konversi string ke integer, sambil menghapus spasi
-#         angka_list = [int(angka.strip()) for angka in angka_string]
-#
-#         angka_cari = int(input("Masukkan angka yang ingin Anda cari: "))
-#
-#         # Cek apakah angka ada dalam list
-#         indeks_list = [i for i, num in enumerate(angka_list) if num == angka_cari]
-#
-#         if indeks_list:
-#             print(f"Angka {angka_cari} ditemukan pada indeks: {', '.join(map(str, indeks_list))}")
-#         else:
-#             print(f"Angka {angka_cari} tidak ditemukan dalam list.")
-#
-# except ValueError:
-#     print("Mohon masukkan angka yang valid!")
+    print("Mohon masukkan angka yang valid!")
