@@ -70,8 +70,13 @@ Function adalah blok kode yang dirancang untuk menjalankan tugas tertentu dan bi
 
 # info_buku("Laskar Pelangi", "Andrea Hirata", 2005)
 
-# function dengan parameter opsional
-# Python menyediakan *args untuk menerima banyak argumen tanpa batas dan **kwargs untuk menerima pasangan kunci-nilai.
+"""function dengan parameter opsional
+Python menyediakan *args untuk menerima banyak argumen tanpa batas dan **kwargs untuk menerima pasangan kunci-nilai.
+*args => menyimpan nilai dalam bentuk tuple
+**kwargs => menyimpan nilai dalam bentuk dictionary
+"""
+
+
 # def jumblahkan(*angka):
 #     return sum(angka)
 
@@ -151,12 +156,26 @@ Buat lambda function untuk menghitung kuadrat dari sebuah angka.
 
 # def luas_lingkaran(r):
 #     return 3.14 * r**2
-luas_lingkaran = lambda r : math.pi * r ** 2
-print(luas_lingkaran(5))
+# luas_lingkaran = lambda r : math.pi * r ** 2
+# print(luas_lingkaran(5))
 
-sapa = lambda nama = "Teman": print(f"Hallo, {nama}!")
-sapa()
-sapa("Bastian")
+# sapa = lambda nama = "Teman": print(f"Hallo, {nama}!")
+# sapa()
+# sapa("Bastian")
 
-kuadrat = lambda a: a ** 2
-print(f"hasil dari kuadrat {kuadrat(3)}")
+# kuadrat = lambda a: a ** 2
+# print(f"hasil dari kuadrat {kuadrat(3)}")
+
+# hitung_diskon = lambda harga, diskon = 10 : harga - (harga * diskon / 100)
+
+# harga_awal = 100000
+# diskon_persen = 15
+# # :,.0f → Agar angka memiliki format ribuan (contoh: Rp75,000).
+# print(f"Harga Setelah diskon: Rp.{hitung_diskon(harga_awal, diskon_persen):,.0f}")
+
+hitung_diskon = lambda harga, diskon = 10 : max(0, harga - (harga * min(diskon, 100) / 100))
+
+harga_awal = 100000
+diskon_persen = 150
+# :,.0f → Agar angka memiliki format ribuan (contoh: Rp75,000).
+print(f"Harga Setelah diskon: Rp.{hitung_diskon(harga_awal, diskon_persen):,.0f}")
