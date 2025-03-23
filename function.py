@@ -1,4 +1,4 @@
-import math
+# import math
 """
 📌 Apa Itu Function?
 Function adalah blok kode yang dirancang untuk menjalankan tugas tertentu dan bisa digunakan kembali tanpa harus menulis ulang kodenya.
@@ -277,8 +277,8 @@ Tandai skor yang di bawah 70 dengan teks "Perlu perbaikan!" seperti ini:
 📌 Petunjuk: Gunakan if di dalam loop!
 """
 
-skor_siswa = [85, 60, 90, 40, 75]
-nilai_standart = 70
+# skor_siswa = [85, 60, 90, 40, 75]
+# nilai_standart = 70
 
 # for i, nilai in enumerate(skor_siswa, start=1):
 #     if nilai < nilai_standart:
@@ -339,24 +339,88 @@ Kelipatan 3 dan 5
 # print(kelipatan3_kelipatan5)
 
 # Coba ubah program ini agar bisa menerima input angka dari pengguna! 🔥
+# def cek_angka(angka_kelipatan, angka_user):
+#     return 2 <= angka_kelipatan <= angka_user
+#
+# def input_kelipatan(nama_kelipatan, angka_user):
+#     while True:
+#         try:
+#             angka_kelipatan = int(input(f"Masukan {nama_kelipatan}: "))
+#             if(cek_angka(angka_kelipatan, angka_user)):
+#                 return angka_kelipatan
+#             print(f"Angka kelipatan harus antara 2 dan {angka_user}")
+#         except ValueError:
+#             print("Masukan angka yang benar!")
+#
+# while True:
+#     try:
+#         angka_user = int(input("Masukan angka: "))
+#         # jika angka dibawah 10
+#         if angka_user < 10:
+#             print("Masukan angka setidaknya lebih besar dari 10")
+#             continue
+#
+#         angka_kelipatan1 = input_kelipatan("Kelipatan-1", angka_user)
+#         angka_kelipatan2 = input_kelipatan("Kelipatan-2", angka_user)
+#
+#         angka = list(range(1, angka_user + 1))
+#         kelipatan1 = list(filter(lambda a : a % angka_kelipatan1 == 0, angka))
+#         kelipatan2 = list(filter(lambda a : a % angka_kelipatan2 == 0, angka))
+#         kelipatan_keduanya = list(set(kelipatan1) & set(kelipatan2))
+#
+#         print("\n==== HASIL PERHITUNGAN ====")
+#         print(f"Kelipatan {angka_kelipatan1}: {", ".join(map(str, kelipatan1))}")
+#         print(f"Kelipatan {angka_kelipatan2}: {', '.join(map(str, kelipatan2))}")
+#         print(f"Kelipatan {angka_kelipatan1} dan {angka_kelipatan2}: {', '.join(map(str, kelipatan_keduanya))}")
+#
+#         break
+#
+#     except ValueError:
+#         print("Masukan angka yang benar!")
+
+
+
+# experimen
+
+def input_kelipatan(angka_user):
+    while True:
+        try:
+            kelipatan_str = input("Masukkan kelipatan yang ingin dihitung (pisahkan dengan koma): ")
+            kelipatan_list = list(map(int, kelipatan_str.split(",")))
+
+            # Validasi angka kelipatan
+            if all(2 <= k <= angka_user for k in kelipatan_list):
+                return kelipatan_list
+
+            print(f"Semua angka kelipatan harus antara 2 dan {angka_user}!")
+        except ValueError:
+            print("Masukkan angka yang benar!")
+
 while True:
     try:
-        angka_user = int(input("Masukan angka: "))
-
-        # jika angka dibawah 10
+        angka_user = int(input("Masukkan angka batas: "))
         if angka_user < 10:
-            print("Masukan angka setidaknya lebih besar dari 10")
+            print("Masukkan angka setidaknya lebih besar dari 10")
             continue
 
-        angka = list(range(1, angka_user + 1))
-        kelipatan3 = list(filter(lambda a : a % 3 == 0, angka))
-        kelipatan5 = list(filter(lambda a : a % 5 == 0, angka))
-        kelipatan_keduanya = list(set(kelipatan3) & set(kelipatan5))
+        kelipatan_list = input_kelipatan(angka_user)
 
-        print(f"Kelipatan 3 = {kelipatan3}")
-        print(f"Kelipatan 5 = {kelipatan5}")
-        print(f"Kelipatan 3 dan kelipatan 5 = {kelipatan_keduanya}")
+        angka = list(range(1, angka_user + 1))
+        hasil_kelipatan = {k: list(filter(lambda a: a % k == 0, angka)) for k in kelipatan_list}
+
+        # Hitung irisan semua kelipatan (angka yang habis dibagi semua input)
+        irisan = set(angka)
+        for kel in kelipatan_list:
+            irisan &= set(hasil_kelipatan[kel])
+
+        # Tampilkan hasil
+        print("\n==== HASIL PERHITUNGAN ====")
+        for k, v in hasil_kelipatan.items():
+            print(f"Kelipatan {k}: {', '.join(map(str, v))}")
+
+        print(f"Irisan semua kelipatan: {', '.join(map(str, sorted(irisan)))}")
+
         break
-        
+
     except ValueError:
-        print("Masukan angka yang benar!")
+        print("Masukkan angka yang benar!")
