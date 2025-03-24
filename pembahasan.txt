@@ -1,0 +1,47 @@
+PEMBAHASAN TENTANG VALIDASI IP ADDRESS MENGGUNAKAN REGEX
+
+1️⃣ Baris pertama: Definisi pola regex untuk alamat IP
+pattern = r"^(\d{1,3}\.){3}\d{1,3}$"
+
+🔹 Penjelasan pola regex (r"^(\d{1,3}\.){3}\d{1,3}$"):
+    🔸^ → Awal string (pastikan tidak ada karakter sebelum alamat IP).
+
+    🔸(\d{1,3}\.){3} → Tiga kelompok angka (1-3 digit) yang diikuti titik
+        🔸\d{1,3} → Maksimum 3 digit angka (0-999).
+        🔸\. → Titik literal (karena titik dalam regex berarti "karakter apa pun", kita harus escape dengan \.).
+        🔸{3} → Harus ada tiga kelompok angka yang diikuti titik.
+
+    🔸\d{1,3} → Bagian terakhir adalah angka 1-3 digit (tanpa titik).
+
+    🔸$ → Akhir string (pastikan tidak ada karakter tambahan setelah alamat IP).
+
+🔹 Contoh yang cocok dengan regex ini:
+    ✅ "192.168.1.1"
+    ✅ "10.0.0.255"
+    ❌ "256.100.1.1" (masih cocok dengan regex, tetapi nanti gagal dalam validasi angka > 255)
+    ❌ "192.168.1" (hanya 3 bagian, harus 4)
+
+2️⃣ Mengecek apakah IP sesuai dengan regex
+
+if re.match(pattern, ip_addres):
+    🔸re.match(pattern, ip_addres) → Memeriksa apakah string IP sesuai dengan regex.
+    🔸Jika cocok, lanjut ke validasi berikutnya. Jika tidak cocok, langsung return False.
+
+3️⃣ Memecah IP menjadi angka-angka dan memeriksa batas valid
+
+octets = ip_addres.split(".")
+for octet in octets:
+    if int(octet) > 255:
+        return False
+
+    🔸ip_addres.split(".") → Memecah IP berdasarkan titik (".") menjadi list angka.
+        "192.168.1.10".split(".")  # Output: ['192', '168', '1', '10']
+
+    🔸Loop memeriksa apakah ada angka lebih dari 255
+        🔸int(octet) > 255 → Jika ada bagian yang lebih besar dari 255, IP tidak valid.
+
+4️⃣ Mengembalikan hasil validasi
+
+return True
+    🔸Jika semua bagian IP valid (0-255), maka return True.
+    🔸Jika ada yang tidak valid, maka sebelumnya sudah return False.
