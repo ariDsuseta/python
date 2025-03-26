@@ -3,9 +3,15 @@ from time import sleep
 import re
 data_pelanggan = [
     {
-        "nama" : "Ari suseta",
-        "alamat" : "DSN Plumbang Desa pandansari",
+        "nama" : "Bagus",
+        "alamat" : "DSN Contoh Desa Sembarang",
         "no_ip": "10.10.1.120",
+        "no_hp" : "tidak ada"
+    },
+    {
+        "nama" : "Prass",
+        "alamat" : "DSN Contoh Desa Kupu",
+        "no_ip": "10.10.1.12",
         "no_hp" : "tidak ada"
     }
 ]
@@ -71,14 +77,28 @@ def is_valid_phone(phone_number):
     return re.match(pattern, phone_number) is not None
 
 # function tampil data
-def tampil_data(data):
-    for data in data_pelanggan:
-        data_tabulate = [
-            ["Nama", data["nama"]],
-            ["Alamat", data["alamat"]],
-            ["Ip Address", data["no_ip"]],
-            ["No Hp", data["no_hp"]]
-        ]
+def tampil_data(data_pelanggan, id=False, prompt=None):
+    if prompt is not None:
+        sleep(1)
+        print(prompt)
+        sleep(0.5)
+
+    for i, data in enumerate(data_pelanggan):
+        if id:
+            data_tabulate = [
+                ["ID", i],
+                ["Nama", data["nama"]],
+                ["Alamat", data["alamat"]],
+                ["Ip Address", data["no_ip"]],
+                ["No Hp", data["no_hp"]]
+            ]
+        else:
+            data_tabulate = [
+                ["Nama", data["nama"]],
+                ["Alamat", data["alamat"]],
+                ["Ip Address", data["no_ip"]],
+                ["No Hp", data["no_hp"]]
+            ]
         print("\n"+ tabulate(data_tabulate, headers="firstrow", tablefmt="grid"))
 
 # function edit data
@@ -88,7 +108,7 @@ def edit_data(data_pelanggan):
     tampil_data(data_pelanggan)
     while True:
         try:
-            pilihan = int(input(f"Cari data yang mau di edit (1 - {len(data_pelanggan)})")) - 1
+            pilihan = int(input(f"Cari data yang mau di edit (1 - {len(data_pelanggan)}) ")) - 1
             data_edit = data_pelanggan[pilihan]
             break
         except (ValueError, IndexError) :
@@ -110,6 +130,61 @@ def edit_data(data_pelanggan):
         else:
             print("Pilihan tidak valid!")
     data_pelanggan[pilihan] = new_data
+
+# fungction pecarian data
+def cari_pelanggan_ip_rgx(prompt, data_pelanggan):
+    while True:
+        cari = input(prompt)
+        hasil = [p for p in data_pelanggan if re.search(rf"\b{re.escape(cari)}\b", p["no_ip"])]
+        if hasil:
+            return hasil
+        
+        print("Data tidak di temukan!")
+    
+# function delet data
+def delete_data_pelanggan(prompt, data_pel):
+    while True:
+        cari = input(prompt).strip()
+        hasil_pencarian = [p for p in data_pel if re.search(rf"\b{re.escape(cari)}\b", p["no_ip"])]
+
+        if hasil_pencarian:
+            break
+
+        print("Data tidak di temukan!")
+
+    # tampilkan hasil dan kasih id nya
+    tampil_data(hasil_pencarian, id=True, prompt="\nHasil Pencarian data!")
+
+    # memilih data yang akan di hapus
+    while True:
+        if len(hasil_pencarian) == 1:
+            id_hapus = 0
+        else:
+            id_hapus = input("Masukan id data yang mau dihapus: ").strip()
+            if id_hapus.isdigit() and 0 <= int(id_hapus) < len(hasil_pencarian):
+                id_hapus = int(id_hapus)
+            else:
+                print("ID tidak valid! Silakan coba lagi.")
+                continue
+
+        konfirmasi = input("Apakah anda yakin ingin menghapus data ini? (y/n) : ").strip().lower()
+        if konfirmasi in ["y", ""]:
+            break
+        else:
+            print("Penghapusan di batalkan.")
+            return
+    
+    # menghapus data berdasarkan index dari "Hasil pencarian"
+    id_data_hapus = next(i for i, data in enumerate(data_pel) if data == hasil_pencarian[id_hapus])
+    del data_pel[id_data_hapus]
+    
+    print("Manghapus data", end=" ", flush=True)
+    for x in range(1, 6):
+        print(">", end="", flush=True)
+        sleep(0.5)
+        if x == 5: print(">")
+    sleep(1)
+    print("Data berhasil di hapus!")
 
 # loop utama program
 while True:
@@ -149,6 +224,16 @@ while True:
         # menampilkan data
         if keyword == 3:
             tampil_data(data_pelanggan)
+
+        # pencarian data
+        if keyword == 4:
+            
+            hasil_pencarian = cari_pelanggan_ip_rgx("Masukan keyword Ip (.20 / 20 / 1.20 / lengkap): ", data_pelanggan)
+            tampil_data(hasil_pencarian)
+
+        # delete data
+        if keyword == 5:
+            delete_data_pelanggan("Masukan keyword Ip (.20 / 20 / 1.20 / lengkap): ", data_pelanggan)
 
         # keluar dari program
         elif keyword == 6:
