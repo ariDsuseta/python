@@ -45,3 +45,6 @@ for octet in octets:
 return True
     🔸Jika semua bagian IP valid (0-255), maka return True.
     🔸Jika ada yang tidak valid, maka sebelumnya sudah return False.
+
+
+test
