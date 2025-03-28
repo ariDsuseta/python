@@ -1,0 +1,1 @@
+Blok finally akan selalu dijalankan, baik terjadi error atau tidak. Biasanya digunakan untuk menutup file, koneksi database, dll.
